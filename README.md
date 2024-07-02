@@ -3,8 +3,10 @@
 
 
 > [!IMPORTANT]
-> In this Portfolio you will see all the projects that i maded for the Introduction to Data Science class.
-
+> In this Portfolio you will see all the projects that i maded for the Introduction to Data Science class. The book we used : R for Data Science, O'Reilly.
+<picture>
+> https://es.r4ds.hadley.nz/cover.png
+</picture>
 + Data Manipulation
 + Data Description
 + Distributions
