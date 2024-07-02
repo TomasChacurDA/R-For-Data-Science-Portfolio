@@ -4,7 +4,7 @@
 
 > [!IMPORTANT]
 > In this Portfolio you will see all the projects that i maded for the Introduction to Data Science class.
-```
+
 + Data Manipulation
 + Data Description
 + Distributions
@@ -14,4 +14,4 @@
 + Modeling Part 2
 + Final Class Project
 + Asociation Rules
-```
+
