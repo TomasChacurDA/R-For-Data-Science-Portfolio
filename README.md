@@ -2,7 +2,7 @@
 ## National University of San Martin Introduction to Data Science class
 ### In this Portfolio you will see all the projects that i maded for the Introduction to Data Science class.
 ### It contains 
-#### *Data Manipulation
+#### * Data Manipulation
 #### Data Description
 #### Distributions
 #### Data Cleaning
