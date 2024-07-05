@@ -1,0 +1,8 @@
+Semana 5 - Ciencia de Datos
+Esta semana es particular. Vamos a usar todas las herramientas que vimos hasta ahora para trabajar en un problema "real" (simulado), a partir de los conjuntos de datos que ya conocemos. El énfasis de esta semana no está en presentar herramientas ni conceptos nuevos, sino en poner en práctica todo lo que aprendimos, y ganar experiencia en la planificación de un proyecto.
+
+Como vamos a ver es importante tener una hoja de ruta antes de meterse de cabeza en el código y los datos. Esto nos va a ayudar a mantenernos enfocados y a no perder de vista la pregunta inicial. Los datos pueden ser como una jungla o un laberinto: si entramos sin guía, tenemos chances de perdernos.
+
+Por otro lado, esta semana vamos a trabajar en el desarrollo de una línea argumental, para convencer a una hipotética audiencia de que el camino elegido va a conducir a una respuesta, y que esta respuesta es adecuada (y tal vez, la mejor) para la pregunta con la que estamos trabajando. Recuerden que en general no hay una respuesta única para ninguna respuesta en este juego. Poder argumentar de manera sólida y ordenada en favor de la respuesta que nosotros elegimos es una habilidad clave que tienen que lograr desarrollar.
+
+No se asusten. Sabemos que todo esto puede ser abrumador al principio, pero confíen en que con la práctica van a ir adquiriendo estas habilidades, y algunas las van a naturalizar. Hoy es el primer paso.
