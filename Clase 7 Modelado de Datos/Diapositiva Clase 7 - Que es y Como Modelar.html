@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="Clase7_diapos_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Clase7_diapos_files/libs/quarto-html/tabby.min.js"></script>
+<script src="Clase7_diapos_files/libs/quarto-html/popper.min.js"></script>
+<script src="Clase7_diapos_files/libs/quarto-html/tippy.umd.min.js"></script>
+<link href="Clase7_diapos_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Clase7_diapos_files/libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="Clase7_diapos_files/libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="Clase7_diapos_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.3.450">
+
+  <title>Modelado de datos</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="Clase7_diapos_files/libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="Clase7_diapos_files/libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="Clase7_diapos_files/libs/revealjs/dist/theme/quarto.css">
+  <link href="Clase7_diapos_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="Clase7_diapos_files/libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="Clase7_diapos_files/libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="Clase7_diapos_files/libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
+  }
+
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
+
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
+
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-titled.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
+
+  .callout:not(.callout-titled) .callout-body {
+      display: flex;
+  }
+
+  .callout:not(.no-icon).callout-titled.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
+
+  .callout.callout-titled .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-titled .callout-title  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+    
+  .callout.callout-titled.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
+
+  .callout.callout-titled.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
+
+  .callout.callout-style-simple div.callout-title {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-title {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-title {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-titled .callout-body > .callout-content > :last-child {
+    margin-bottom: 0.5rem;
+  }
+
+  .callout.callout-titled .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-titled) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-title {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-title {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-title {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-title {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-title {
+    background-color: #ffe5d0
+  }
+
+  </style>
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  <script src="Clase7_diapos_files/libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+  <script src="Clase7_diapos_files/libs/plotly-binding-4.10.2/plotly.js"></script>
+  <script src="Clase7_diapos_files/libs/typedarray-0.1/typedarray.min.js"></script>
+  <script src="Clase7_diapos_files/libs/jquery-3.5.1/jquery.min.js"></script>
+  <link href="Clase7_diapos_files/libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet">
+  <script src="Clase7_diapos_files/libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+  <link href="Clase7_diapos_files/libs/plotly-htmlwidgets-css-2.11.1/plotly-htmlwidgets.css" rel="stylesheet">
+  <script src="Clase7_diapos_files/libs/plotly-main-2.11.1/plotly-latest.min.js"></script>
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">Modelado de datos</h1>
+  <p class="subtitle">Introducción a Ciencia de Datos - 2024c1</p>
+
+<div class="quarto-title-authors">
+</div>
+
+  <p class="date">22/04/2024</p>
+</section>
+<section id="hasta-ahora" class="slide level2">
+<h2>Hasta ahora</h2>
+<ul>
+<li>Exploración de datasets</li>
+<li>Manipulación (orden, filtrado, agrupamiento)</li>
+<li>Métricas de resumen</li>
+<li>Estudio de distribuciones</li>
+<li>Limpieza de datos</li>
+</ul>
+</section>
+<section id="modelado---primeros-pasos" class="slide level2">
+<h2>Modelado - Primeros pasos</h2>
+<p>Modelar datos sirve principalmente para cuatro cosas:</p>
+<div>
+<ol type="1">
+<li class="fragment">Cuantificar</li>
+<li class="fragment">Explorar</li>
+<li class="fragment">Resumir</li>
+<li class="fragment">Predecir</li>
+</ol>
+</div>
+</section>
+<section id="preguntas" class="slide level2">
+<h2>Preguntas</h2>
+<ul>
+<li>¿Cómo cambia el ancho de los pétalos con el largo?</li>
+<li>¿Cuál será el ancho del pétalo de una flor con un largo que no hemos visto todavía?</li>
+</ul>
+<div class="fragment">
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Acá ya no estamos hablando de describir una variable, o la relación entre una variable y una categoría, sino que queremos ver <em>cómo cambia</em> una variable continua con la otra.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="qué-quiere-decir-modelar" class="slide level2">
+<h2>¿Qué quiere decir modelar?</h2>
+
+<img data-src="figure/dag1.png" class="r-stretch"></section>
+<section id="qué-quiere-decir-modelar-1" class="slide level2">
+<h2>¿Qué quiere decir modelar?</h2>
+
+<img data-src="figure/dag2.png" class="r-stretch"></section>
+<section id="qué-quiere-decir-modelar-2" class="slide level2 smaller">
+<h2>¿Qué quiere decir modelar?</h2>
+
+<img data-src="figure/dag3.png" class="r-stretch"></section>
+<section id="qué-quiere-decir-modelar-3" class="slide level2 smaller">
+<h2>¿Qué quiere decir modelar?</h2>
+
+<img data-src="figure/dag4.png" class="r-stretch"><div class="fragment">
+<ul>
+<li><p>Hasta acá, solo estamos definiendo relaciones entre variables, pero no estamos diciendo qué tipo de relación es.</p></li>
+<li><p>El factor <code>Otros</code> no es observable. Acá entra la parte probabilítica del modelo, porque vamos a asignarle una determinada distribución (en esta materia, siempre normal)</p></li>
+<li><p>Vammos a hacer una primera suposición:</p></li>
+</ul>
+<p><span class="math display">\[
+\text{A} = f(\text{L}, \text{O}) = f(\text{L}) + \text{O}
+\]</span></p>
+</div>
+</section>
+<section id="entra-un-modelo" class="slide level2 smaller">
+<h2>Entra un modelo</h2>
+<p><strong>Idea:</strong> escribamos una expresión matemática que nos parezca que puede ajustarse a la forma en la que se comportan los datos: <span class="math display">\[
+\text{A} = \mathbf{a} + \mathbf{b}\cdot\text{L} + \text{O}
+\]</span></p>
+<p><span class="math display">\[
+\text{O} \sim N(0, \sigma)
+\]</span></p>
+
+<img data-src="Clase7_diapos_files/figure-revealjs/unnamed-chunk-6-1.png" width="960" class="r-stretch"></section>
+<section id="cómo-lo-hicimos" class="slide level2 smaller">
+<h2>¿Cómo lo hicimos?</h2>
+<p>La <em>familia</em> de funciones definida por el modelo contiene una infinidad de posibles curvas, para cada combinación de los parámetros.</p>
+
+<img data-src="Clase7_diapos_files/figure-revealjs/unnamed-chunk-8-1.png" width="960" class="r-stretch"></section>
+<section id="cómo-lo-hicimos-1" class="slide level2 smaller">
+<h2>¿Cómo lo hicimos?</h2>
+<p>Encontramos la mejor reduciendo la dispersión de los <em>residuos</em> al cuadrado. Los residuos son la distancia del modelo a los datos:</p>
+<p><span class="math inline">\(r = \text{Ancho del pétalo} - \text{modelo}\)</span></p>
+
+<img data-src="Clase7_diapos_files/figure-revealjs/unnamed-chunk-10-1.png" width="960" class="r-stretch"></section>
+<section id="un-toque-de-matemática" class="slide level2 smaller">
+<h2>Un toque de matemática</h2>
+<p>La función que minimizamos para encontrar los valores de <span class="math inline">\(a\)</span> y <span class="math inline">\(b\)</span> es:</p>
+<p><span class="math display">\[
+RMSE = \sqrt{\frac{1}{N}\sum_{i=1}^N {\left\{\text{Petal.Width}_i - \left(\mathbf{a} + \mathbf{b}\cdot \text{Petal.Length}_i\right)\right\}^2}}
+\]</span> en otras palabras: <span class="math display">\[
+RMSE = \sqrt{\frac{1}{N}\sum_{i=1}^N {(\text{dato}_i - \text{modelo}_i})^2} = \sqrt{\frac{1}{N}\sum_{i=1}^N r^2_i}
+\]</span> Minimizando esta función, encontramos los mejores valores de <strong>a</strong> y <strong>b</strong>.</p>
+</section>
+<section id="modelo-lineal-múltiple" class="slide level2 smaller">
+<h2>Modelo lineal múltiple</h2>
+<p>Por supuesto, podemos suponer que más de una variable observada afecta al ancho del pétalo.</p>
+
+<img data-src="figure/dag5.png" class="r-stretch"><div class="fragment">
+<p>Si suponemos la misma relación lineal:</p>
+<p><span class="math display">\[
+\text{A} = \mathbf{a} + \mathbf{b}\cdot\text{L} + \mathbf{c}\cdot x_2 + \text{O}\;\;,
+\]</span> el modelo es un plano en el espacio de <span class="math inline">\((L, x_2, A)\)</span>.</p>
+</div>
+</section>
+<section id="modelo-lineal-múltiple-1" class="slide level2 smaller">
+<h2>Modelo lineal múltiple</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div id="htmlwidget-8775fbfd77c2378e584e" style="width:960px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-8775fbfd77c2378e584e">{"x":{"visdat":{"4d70a305dda":["function () ","plotlyVisDat"]},"cur_data":"4d70a305dda","attrs":{"4d70a305dda":{"mode":"markers","x":{},"y":{},"z":{},"marker":{"color":"rgb(1, 1, 255)","size":5},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"scatter3d"},"4d70a305dda.1":{"mode":"markers","x":{},"y":{},"z":{},"marker":{"color":"rgb(1, 1, 255)","size":5},"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"surface","opacity":0.69999999999999996,"inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"scene":{"xaxis":{"title":"Petal.Length"},"yaxis":{"title":"Sepal.Width"},"zaxis":{"title":"Petal.Width"}},"hovermode":"closest","showlegend":false,"legend":{"yanchor":"top","y":0.5}},"source":"A","config":{"modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"data":[{"mode":"markers","x":[4.7000000000000002,4.5,4.9000000000000004,4,4.5999999999999996,4.5,4.7000000000000002,3.2999999999999998,4.5999999999999996,3.8999999999999999,3.5,4.2000000000000002,4,4.7000000000000002,3.6000000000000001,4.4000000000000004,4.5,4.0999999999999996,4.5,3.8999999999999999,4.7999999999999998,4,4.9000000000000004,4.7000000000000002,4.2999999999999998,4.4000000000000004,4.7999999999999998,5,4.5,3.5,3.7999999999999998,3.7000000000000002,3.8999999999999999,5.0999999999999996,4.5,4.5,4.7000000000000002,4.4000000000000004,4.0999999999999996,4,4.4000000000000004,4.5999999999999996,4,3.2999999999999998,4.2000000000000002,4.2000000000000002,4.2000000000000002,4.2999999999999998,3,4.0999999999999996],"y":[3.2000000000000002,3.2000000000000002,3.1000000000000001,2.2999999999999998,2.7999999999999998,2.7999999999999998,3.2999999999999998,2.3999999999999999,2.8999999999999999,2.7000000000000002,2,3,2.2000000000000002,2.8999999999999999,2.8999999999999999,3.1000000000000001,3,2.7000000000000002,2.2000000000000002,2.5,3.2000000000000002,2.7999999999999998,2.5,2.7999999999999998,2.8999999999999999,3,2.7999999999999998,3,2.8999999999999999,2.6000000000000001,2.3999999999999999,2.3999999999999999,2.7000000000000002,2.7000000000000002,3,3.3999999999999999,3.1000000000000001,2.2999999999999998,3,2.5,2.6000000000000001,3,2.6000000000000001,2.2999999999999998,2.7000000000000002,3,2.8999999999999999,2.8999999999999999,2.5,2.7999999999999998],"z":[1.3999999999999999,1.5,1.5,1.3,1.5,1.3,1.6000000000000001,1,1.3,1.3999999999999999,1,1.5,1,1.3999999999999999,1.3,1.3999999999999999,1.5,1,1.5,1.1000000000000001,1.8,1.3,1.5,1.2,1.3,1.3999999999999999,1.3999999999999999,1.7,1.5,1,1.1000000000000001,1,1.2,1.6000000000000001,1.5,1.6000000000000001,1.5,1.3,1.3,1.3,1.2,1.3999999999999999,1.2,1,1.3,1.2,1.3,1.3,1.1000000000000001,1.3],"marker":{"color":"rgb(1, 1, 255)","size":5,"line":{"color":"rgba(31,119,180,1)"}},"type":"scatter3d","error_y":{"color":"rgba(31,119,180,1)"},"error_x":{"color":"rgba(31,119,180,1)"},"line":{"color":"rgba(31,119,180,1)"},"frame":null},{"colorbar":{"title":"Petal.Width<br />z","ticklen":2,"len":0.5,"lenmode":"fraction","y":1,"yanchor":"top"},"colorscale":[["0","rgba(68,1,84,1)"],["0.0416666666666666","rgba(70,19,97,1)"],["0.0833333333333333","rgba(72,32,111,1)"],["0.125","rgba(71,45,122,1)"],["0.166666666666667","rgba(68,58,128,1)"],["0.208333333333333","rgba(64,70,135,1)"],["0.25","rgba(60,82,138,1)"],["0.291666666666667","rgba(56,93,140,1)"],["0.333333333333333","rgba(49,104,142,1)"],["0.375","rgba(46,114,142,1)"],["0.416666666666667","rgba(42,123,142,1)"],["0.458333333333333","rgba(38,133,141,1)"],["0.5","rgba(37,144,140,1)"],["0.541666666666667","rgba(33,154,138,1)"],["0.583333333333333","rgba(39,164,133,1)"],["0.625","rgba(47,174,127,1)"],["0.666666666666667","rgba(53,183,121,1)"],["0.708333333333333","rgba(79,191,110,1)"],["0.75","rgba(98,199,98,1)"],["0.791666666666667","rgba(119,207,85,1)"],["0.833333333333333","rgba(147,214,70,1)"],["0.875","rgba(172,220,52,1)"],["0.916666666666667","rgba(199,225,42,1)"],["0.958333333333333","rgba(226,228,40,1)"],["1","rgba(253,231,37,1)"]],"showscale":true,"mode":"markers","x":[3,3.0874999999999999,3.1749999999999998,3.2625000000000002,3.3500000000000001,3.4375,3.5249999999999999,3.6124999999999998,3.6999999999999997,3.7874999999999996,3.875,3.9624999999999999,4.0499999999999998,4.1374999999999993,4.2249999999999996,4.3125,4.3999999999999995,4.4874999999999998,4.5749999999999993,4.6624999999999996,4.75,4.8374999999999995,4.9249999999999998,5.0124999999999993,5.0999999999999996],"y":[2,2.0583333333333331,2.1166666666666667,2.1749999999999998,2.2333333333333334,2.2916666666666665,2.3500000000000001,2.4083333333333332,2.4666666666666668,2.5249999999999999,2.583333333333333,2.6416666666666666,2.7000000000000002,2.7583333333333333,2.8166666666666664,2.875,2.9333333333333331,2.9916666666666667,3.0499999999999998,3.1083333333333334,3.1666666666666665,3.2249999999999996,3.2833333333333332,3.3416666666666668,3.3999999999999999],"z":[[0.84771708189029216,0.86997136912076911,0.89222565635124607,0.91447994358172324,0.9367342308122002,0.95898851804267726,0.98124280527315422,1.0034970925036313,1.0257513797341082,1.0480056669645852,1.0702599541950624,1.0925142414255393,1.1147685286560165,1.1370228158864932,1.1592771031169704,1.1815313903474476,1.2037856775779243,1.2260399648084015,1.2482942520388784,1.2705485392693556,1.2928028264998326,1.3150571137303095,1.3373114009607867,1.3595656881912637,1.3818199754217406],[0.85967323204111334,0.8819275192715903,0.90418180650206725,0.92643609373254443,0.94869038096302138,0.97094466819349834,0.99319895542397529,1.0154532426544525,1.0377075298849294,1.0599618171154064,1.0822161043458836,1.1044703915763605,1.1267246788068377,1.1489789660373144,1.1712332532677916,1.1934875404982688,1.2157418277287455,1.2379961149592227,1.2602504021896996,1.2825046894201768,1.3047589766506538,1.3270132638811307,1.3492675511116079,1.3715218383420849,1.3937761255725618],[0.87162938219193453,0.89388366942241149,0.91613795665288844,0.93839224388336562,0.96064653111384257,0.98290081834431964,1.0051551055747967,1.0274093928052737,1.0496636800357506,1.0719179672662276,1.0941722544967047,1.1164265417271817,1.1386808289576589,1.1609351161881356,1.1831894034186128,1.20544369064909,1.2276979778795667,1.2499522651100439,1.2722065523405208,1.294460839570998,1.316715126801475,1.3389694140319519,1.3612237012624291,1.383477988492906,1.405732275723383],[0.88358553234275572,0.90583981957323267,0.92809410680370963,0.95034839403418681,0.97260268126466376,0.99485696849514071,1.0171112557256177,1.0393655429560948,1.0616198301865718,1.0838741174170488,1.1061284046475259,1.1283826918780029,1.1506369791084801,1.1728912663389568,1.195145553569434,1.2173998407999111,1.2396541280303879,1.2619084152608651,1.284162702491342,1.3064169897218192,1.3286712769522961,1.3509255641827731,1.3731798514132503,1.3954341386437272,1.4176884258742042],[0.89554168249357691,0.91779596972405386,0.94005025695453082,0.96230454418500799,0.98455883141548495,1.0068131186459619,1.0290674058764389,1.051321693106916,1.073575980337393,1.0958302675678699,1.1180845547983471,1.1403388420288241,1.1625931292593013,1.184847416489778,1.2071017037202552,1.2293559909507323,1.2516102781812091,1.2738645654116862,1.2961188526421632,1.3183731398726404,1.3406274271031173,1.3628817143335943,1.3851360015640715,1.4073902887945484,1.4296445760250254],[0.90749783264439798,0.92975211987487494,0.95200640710535189,0.97426069433582907,0.99651498156630602,1.0187692687967831,1.04102355602726,1.0632778432577372,1.0855321304882142,1.1077864177186911,1.1300407049491681,1.152294992179645,1.1745492794101224,1.1968035666405989,1.2190578538710763,1.2413121411015533,1.2635664283320303,1.2858207155625072,1.3080750027929842,1.3303292900234616,1.3525835772539385,1.3748378644844155,1.3970921517148924,1.4193464389453694,1.4416007261758463],[0.91945398279521928,0.94170827002569624,0.96396255725617319,0.98621684448665037,1.0084711317171273,1.0307254189476043,1.0529797061780812,1.0752339934085584,1.0974882806390354,1.1197425678695123,1.1419968550999895,1.1642511423304664,1.1865054295609436,1.2087597167914204,1.2310140040218975,1.2532682912523747,1.2755225784828514,1.2977768657133286,1.3200311529438056,1.3422854401742828,1.3645397274047597,1.3867940146352367,1.4090483018657138,1.4313025890961908,1.4535568763266677],[0.93141013294604036,0.95366442017651731,0.97591870740699427,0.99817299463747144,1.0204272818679483,1.0426815690984255,1.0649358563289024,1.0871901435593796,1.1094444307898566,1.1316987180203335,1.1539530052508105,1.1762072924812874,1.1984615797117648,1.2207158669422413,1.2429701541727187,1.2652244414031957,1.2874787286336726,1.3097330158641496,1.3319873030946265,1.3542415903251039,1.3764958775555809,1.3987501647860578,1.4210044520165348,1.4432587392470118,1.4655130264774887],[0.94336628309686155,0.9656205703273385,0.98787485755781546,1.0101291447882925,1.0323834320187695,1.0546377192492467,1.0768920064797236,1.0991462937102008,1.1214005809406777,1.1436548681711547,1.1659091554016316,1.1881634426321086,1.210417729862586,1.2326720170930625,1.2549263043235399,1.2771805915540169,1.2994348787844938,1.3216891660149708,1.3439434532454477,1.3661977404759251,1.3884520277064021,1.410706314936879,1.432960602167356,1.4552148893978329,1.4774691766283099],[0.95532243324768273,0.97757672047815969,0.99983100770863664,1.0220852949391137,1.0443395821695907,1.0665938694000678,1.0888481566305448,1.111102443861022,1.1333567310914989,1.1556110183219759,1.1778653055524528,1.2001195927829298,1.2223738800134072,1.2446281672438837,1.2668824544743611,1.2891367417048381,1.311391028935315,1.333645316165792,1.3558996033962689,1.3781538906267463,1.4004081778572233,1.4226624650877002,1.4449167523181772,1.4671710395486541,1.4894253267791311],[0.96727858339850381,0.98953287062898077,1.0117871578594577,1.0340414450899349,1.0562957323204119,1.0785500195508888,1.1008043067813658,1.1230585940118429,1.1453128812423199,1.1675671684727971,1.189821455703274,1.212075742933751,1.2343300301642282,1.2565843173947049,1.2788386046251821,1.3010928918556592,1.323347179086136,1.3456014663166131,1.3678557535470901,1.3901100407775673,1.4123643280080442,1.4346186152385212,1.4568729024689984,1.4791271896994753,1.5013814769299523],[0.97923473354932511,1.0014890207798022,1.0237433080102791,1.0459975952407561,1.068251882471233,1.0905061697017102,1.1127604569321872,1.1350147441626643,1.1572690313931413,1.1795233186236183,1.2017776058540952,1.2240318930845722,1.2462861803150496,1.2685404675455261,1.2907947547760035,1.3130490420064804,1.3353033292369574,1.3575576164674343,1.3798119036979113,1.4020661909283887,1.4243204781588656,1.4465747653893426,1.4688290526198196,1.4910833398502965,1.5133376270807735],[0.9911908837001463,1.0134451709306234,1.0356994581611003,1.0579537453915773,1.0802080326220542,1.1024623198525314,1.1247166070830084,1.1469708943134855,1.1692251815439625,1.1914794687744394,1.2137337560049164,1.2359880432353934,1.2582423304658708,1.2804966176963473,1.3027509049268247,1.3250051921573016,1.3472594793877786,1.3695137666182555,1.3917680538487325,1.4140223410792099,1.4362766283096868,1.4585309155401638,1.4807852027706407,1.5030394900011177,1.5252937772315946],[1.0031470338509676,1.0254013210814446,1.0476556083119215,1.0699098955423985,1.0921641827728754,1.1144184700033526,1.1366727572338295,1.1589270444643067,1.1811813316947837,1.2034356189252606,1.2256899061557376,1.2479441933862145,1.2701984806166919,1.2924527678471684,1.3147070550776458,1.3369613423081228,1.3592156295385998,1.3814699167690767,1.4037242039995537,1.4259784912300311,1.448232778460508,1.470487065690985,1.4927413529214619,1.5149956401519389,1.5372499273824158],[1.0151031840017886,1.0373574712322655,1.0596117584627425,1.0818660456932196,1.1041203329236966,1.1263746201541736,1.1486289073846505,1.1708831946151277,1.1931374818456046,1.2153917690760818,1.2376460563065588,1.2599003435370357,1.2821546307675129,1.3044089179979896,1.3266632052284668,1.348917492458944,1.3711717796894207,1.3934260669198979,1.4156803541503749,1.437934641380852,1.460188928611329,1.4824432158418059,1.5046975030722831,1.5269517903027601,1.549206077533237],[1.0270593341526097,1.0493136213830867,1.0715679086135637,1.0938221958440408,1.1160764830745178,1.1383307703049947,1.1605850575354717,1.1828393447659489,1.2050936319964258,1.227347919226903,1.24960220645738,1.2718564936878569,1.2941107809183341,1.3163650681488108,1.338619355379288,1.3608736426097652,1.3831279298402419,1.4053822170707191,1.427636504301196,1.4498907915316732,1.4721450787621502,1.4943993659926271,1.5166536532231043,1.5389079404535813,1.5611622276840582],[1.0390154843034309,1.0612697715339079,1.0835240587643848,1.105778345994862,1.128032633225339,1.1502869204558159,1.1725412076862929,1.1947954949167701,1.217049782147247,1.2393040693777242,1.2615583566082011,1.2838126438386781,1.3060669310691553,1.328321218299632,1.3505755055301092,1.3728297927605864,1.3950840799910631,1.4173383672215403,1.4395926544520172,1.4618469416824944,1.4841012289129714,1.5063555161434483,1.5286098033739255,1.5508640906044024,1.5731183778348794],[1.0509716344542521,1.0732259216847291,1.095480208915206,1.1177344961456832,1.1399887833761602,1.1622430706066371,1.1844973578371141,1.2067516450675912,1.2290059322980682,1.2512602195285454,1.2735145067590223,1.2957687939894993,1.3180230812199765,1.3402773684504532,1.3625316556809304,1.3847859429114076,1.4070402301418843,1.4292945173723615,1.4515488046028384,1.4738030918333156,1.4960573790637925,1.5183116662942695,1.5405659535247467,1.5628202407552236,1.5850745279857006],[1.0629277846050733,1.0851820718355503,1.1074363590660272,1.1296906462965044,1.1519449335269814,1.1741992207574583,1.1964535079879353,1.2187077952184124,1.2409620824488894,1.2632163696793666,1.2854706569098435,1.3077249441403205,1.3299792313707977,1.3522335186012744,1.3744878058317516,1.3967420930622287,1.4189963802927055,1.4412506675231826,1.4635049547536596,1.4857592419841368,1.5080135292146137,1.5302678164450907,1.5525221036755679,1.5747763909060448,1.5970306781365218],[1.0748839347558945,1.0971382219863715,1.1193925092168484,1.1416467964473256,1.1639010836778025,1.1861553709082795,1.2084096581387564,1.2306639453692336,1.2529182325997106,1.2751725198301878,1.2974268070606647,1.3196810942911417,1.3419353815216188,1.3641896687520956,1.3864439559825728,1.4086982432130499,1.4309525304435267,1.4532068176740038,1.4754611049044808,1.497715392134958,1.5199696793654349,1.5422239665959119,1.5644782538263891,1.586732541056866,1.608986828287343],[1.0868400849067157,1.1090943721371926,1.1313486593676696,1.1536029465981468,1.1758572338286237,1.1981115210591007,1.2203658082895776,1.2426200955200548,1.2648743827505318,1.2871286699810089,1.3093829572114859,1.3316372444419629,1.35389153167244,1.3761458189029168,1.3984001061333939,1.4206543933638711,1.4429086805943478,1.465162967824825,1.487417255055302,1.5096715422857792,1.5319258295162561,1.5541801167467331,1.5764344039772102,1.5986886912076872,1.6209429784381642],[1.0987962350575367,1.1210505222880136,1.1433048095184906,1.165559096748968,1.1878133839794449,1.2100676712099219,1.2323219584403988,1.2545762456708758,1.2768305329013527,1.2990848201318299,1.3213391073623071,1.343593394592784,1.365847681823261,1.3881019690537379,1.4103562562842149,1.4326105435146923,1.4548648307451688,1.4771191179756462,1.4993734052061232,1.5216276924366001,1.5438819796670771,1.566136266897554,1.5883905541280314,1.6106448413585084,1.6328991285889853],[1.1107523852083578,1.1330066724388348,1.1552609596693117,1.1775152468997891,1.1997695341302661,1.2220238213607431,1.24427810859122,1.266532395821697,1.2887866830521739,1.3110409702826511,1.3332952575131283,1.3555495447436052,1.3778038319740822,1.4000581192045591,1.4223124064350361,1.4445666936655135,1.46682098089599,1.4890752681264674,1.5113295553569444,1.5335838425874213,1.5558381298178983,1.5780924170483752,1.6003467042788526,1.6226009915093296,1.6448552787398065],[1.1227085353591792,1.1449628225896562,1.1672171098201332,1.1894713970506103,1.2117256842810873,1.2339799715115642,1.2562342587420412,1.2784885459725184,1.3007428332029953,1.3229971204334725,1.3452514076639495,1.3675056948944264,1.3897599821249036,1.4120142693553803,1.4342685565858575,1.4565228438163347,1.4787771310468114,1.5010314182772886,1.5232857055077655,1.5455399927382427,1.5677942799687197,1.5900485671991966,1.6123028544296738,1.6345571416601508,1.6568114288906277],[1.1346646855100002,1.1569189727404772,1.1791732599709541,1.2014275472014315,1.2236818344319085,1.2459361216623854,1.2681904088928624,1.2904446961233393,1.3126989833538163,1.3349532705842935,1.3572075578147706,1.3794618450452476,1.4017161322757246,1.4239704195062015,1.4462247067366785,1.4684789939671559,1.4907332811976324,1.5129875684281098,1.5352418556585867,1.5574961428890637,1.5797504301195406,1.6020047173500176,1.624259004580495,1.6465132918109719,1.6687675790414489]],"marker":{"color":"rgb(1, 1, 255)","size":5},"type":"surface","opacity":0.69999999999999996,"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.20000000000000001,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</section>
+<section id="cómo-se-hace-esto-en-r" class="slide level2">
+<h2>¿Cómo se hace esto en R?</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(stats)</span>
+<span id="cb1-2"><a href="#cb1-2"></a></span>
+<span id="cb1-3"><a href="#cb1-3"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> Petal.Width <span class="sc">~</span> Petal.Length,</span>
+<span id="cb1-4"><a href="#cb1-4"></a>          <span class="at">data =</span> iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="cómo-se-hace-esto-en-r-1" class="slide level2">
+<h2>¿Cómo se hace esto en R?</h2>
+<div class="sourceCode" id="cb2" data-code-line-numbers="4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">library</span>(stats)</span>
+<span id="cb2-2"><a href="#cb2-2"></a></span>
+<span id="cb2-3"><a href="#cb2-3"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> Petal.Width <span class="sc">~</span> Petal.Length,</span>
+<span id="cb2-4"><a href="#cb2-4"></a>          <span class="at">data =</span> iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="cómo-se-hace-esto-en-r-2" class="slide level2 smaller">
+<h2>¿Cómo se hace esto en R?</h2>
+<div class="sourceCode" id="cb3" data-code-line-numbers="3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="fu">library</span>(stats)</span>
+<span id="cb3-2"><a href="#cb3-2"></a></span>
+<span id="cb3-3"><a href="#cb3-3"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="at">formula =</span> Petal.Width <span class="sc">~</span> Petal.Length,</span>
+<span id="cb3-4"><a href="#cb3-4"></a>          <span class="at">data =</span> iris)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Acá, se usa una mini-sitaxis propia de la función <code>lm</code>:</p>
+<div class="fragment">
+<ul>
+<li>La virgulilla <code>~</code> representa una relación lineal entre las variables. En este caso, <span class="math inline">\(Petal.Width = \mathbf{a} + \mathbf{b}\times Petal.Length\)</span></li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li>La suma <code>+</code> agrega variables independientes al modelo. Por ejemplo,</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>formula <span class="ot">=</span> Petal.Width <span class="sc">~</span> Petal.Length <span class="sc">+</span> Sepal.Length</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><span class="math inline">\(Petal.Width = \mathbf{a} + \mathbf{b}\times Petal.Length + \mathbf{c} \times Sepal.Length\)</span></p>
+</div>
+<div class="fragment">
+<ul>
+<li>En todos lo casos, aparece el término independiente (sesgo u ordenada al origen), <span class="math inline">\(\mathbf{a}\)</span>. Para quitarla, hay que hacerlo explícitamente</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>formula <span class="ot">=</span> Petal.Width <span class="sc">~</span> Petal.Length <span class="sc">-</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="fragment">
+<ul>
+<li>El producto <code>*</code> representa interacciones entre las variables (tema para dentro de dos semanas)</li>
+</ul>
+</div>
+</section>
+<section id="análisis-del-modelo" class="slide level2 scrollable">
+<h2>Análisis del modelo</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">summary</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = Petal.Width ~ Petal.Length, data = df)
+
+Residuals:
+      Min        1Q    Median        3Q       Max 
+-0.273031 -0.073373 -0.006479  0.086271  0.295231 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  -0.08429    0.16070  -0.525    0.602    
+Petal.Length  0.33105    0.03750   8.828 1.27e-11 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.1234 on 48 degrees of freedom
+Multiple R-squared:  0.6188,    Adjusted R-squared:  0.6109 
+F-statistic: 77.93 on 1 and 48 DF,  p-value: 1.272e-11</code></pre>
+</div>
+</div>
+</section>
+<section id="análisis-de-los-residuos" class="slide level2 scrollable">
+<h2>Análisis de los residuos</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="fu">plot</span>(mod)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img data-src="Clase7_diapos_files/figure-revealjs/unnamed-chunk-16-1.png" width="960"></p>
+</div>
+<div class="cell-output-display">
+<p><img data-src="Clase7_diapos_files/figure-revealjs/unnamed-chunk-16-2.png" width="960"></p>
+</div>
+<div class="cell-output-display">
+<p><img data-src="Clase7_diapos_files/figure-revealjs/unnamed-chunk-16-3.png" width="960"></p>
+</div>
+<div class="cell-output-display">
+<p><img data-src="Clase7_diapos_files/figure-revealjs/unnamed-chunk-16-4.png" width="960"></p>
+</div>
+</div>
+<div class="footer footer-default">
+
+</div>
+</section>
+    </div>
+  </div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="Clase7_diapos_files/libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="Clase7_diapos_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="Clase7_diapos_files/libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="Clase7_diapos_files/libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="Clase7_diapos_files/libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="Clase7_diapos_files/libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="Clase7_diapos_files/libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="Clase7_diapos_files/libs/revealjs/plugin/search/search.js"></script>
+  <script src="Clase7_diapos_files/libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="Clase7_diapos_files/libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'smaller': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button', {
+        text: function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+      });
+      clipboard.on('success', function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      });
+      function tippyHover(el, contentFn) {
+        const config = {
+          allowHTML: true,
+          content: contentFn,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start'
+        };
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          return note.innerHTML;
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+    
+
+</body></html>

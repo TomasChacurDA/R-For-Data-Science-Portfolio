@@ -1,0 +1,1 @@
+Antes de empezar a trabajar con los datos tenemos que ver si nos sirven para el análisis que querramos hacer. Esta semana vamos a ver las características deseables que tienen que cumplir nuestros data sets, vamos a ver como identificar sus problemas más comunes y a trabajar con diferentes herramientas para poder adecuarlos a nuestras necesidades y sacarles el máximo provecho.
